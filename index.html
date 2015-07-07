@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<title>Clock</title>
+</head>
+<body>
+	<h1>NYCDA LESSON-8&9</h1>
+	<div id="clockframe">
+			<div id="time">
+				Local time--> <p id="hour">00</p>:<p id="min">00</p>:<p id="sec">00</p>.<p id="milli">000</p> <p id="daynight">a.m.</p>
+			</div>
+		</div>
+		<div id="square">
+		</div>
+	<script type="text/javascript">
+
+		function addZero (i) {
+			if (i < 10) {
+				i = "0" + i;
+			}
+			return i;
+		};
+
+		function addZeros (j) {
+			if (j < 10) {
+				j = "00" + j;
+			} else if (j < 100) {
+				j = "0" + j;
+			}
+			return j;
+		}
+
+		function ampm (k) {
+			if (k > 12) {
+				k = k - 12;
+				document.getElementById("daynight").innerHTML = "p.m."
+			}
+			return k;
+		}
+
+		function tellTime() {
+			var d = new Date();
+			var h = ampm(d.getHours());
+			var m = addZero(d.getMinutes());
+			var s = addZero(d.getSeconds());
+			var mi = addZeros(d.getMilliseconds());
+
+			var x = document.getElementById("hour");
+			var y = document.getElementById("min");
+			var z = document.getElementById("sec");
+			var aa = document.getElementById("milli");
+
+			x.innerHTML = h;
+			y.innerHTML = m;
+			z.innerHTML = s;
+			aa.innerHTML = mi;
+		};
+		
+		function bgchange() {
+			var d = new Date();
+			var o = d.getSeconds();
+
+			if (o%2 === 1) {
+				document.getElementById("clockframe").style.backgroundColor = "red";
+			} else {
+				document.getElementById("clockframe").style.backgroundColor = "green";
+			}
+		}
+		
+		setInterval(function() {
+			tellTime(); 
+			bgchange(); 
+		}, 100);
+
+
+	</script>
+</body>
+</html>
